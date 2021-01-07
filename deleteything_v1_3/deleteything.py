@@ -1,12 +1,14 @@
 import praw
 import re
 
+
 try:
     r = praw.Reddit("user") # obtain PRAW instance using credentials stored in praw.ini file
 except Exception as e:
     print(e)
     print("ERROR: failed to load credentials ini file, could not initialize PRAW instance")
     exit(1)
+
 
 def delete_comments(user, delete_distinguished):
     '''
@@ -29,8 +31,7 @@ def delete_comments(user, delete_distinguished):
 
     for feed in feeds:
         for t in feed:
-            if t.distinguished and not delete_distinguished: # skip distingushed if required
-                continue
+            if t.distinguished and not delete_distinguished: continue # skip distingushed if required
 
             t.delete()
 
@@ -39,6 +40,7 @@ def delete_comments(user, delete_distinguished):
             print(f"deleted t1_{t.id}")
 
     print(f"done deleting {str(deleted_count)} comments.")
+
 
 def delete_submissions(user, delete_distinguished):
     '''
@@ -61,8 +63,7 @@ def delete_submissions(user, delete_distinguished):
 
     for feed in feeds:
         for t in feed:
-            if t.distinguished and not delete_distinguished: # skip distingushed if required
-                continue
+            if t.distinguished and not delete_distinguished: continue # skip distingushed if required
 
             t.delete()
 
@@ -71,6 +72,7 @@ def delete_submissions(user, delete_distinguished):
             print(f"deleted t3_{t.id}")
     
     print(f"done deleting {str(deleted_count)} submissions.")
+
 
 def run():
     print("""--------------------------------------------------------------------------------
@@ -108,6 +110,7 @@ even after it's deleted. The most notable of these services if pushshift.io.
             delete_submissions(me, delete_distinsuished)
 
     print("exiting...")
+
 
 if __name__ == "__main__":
     try:
