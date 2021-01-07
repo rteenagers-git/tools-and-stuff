@@ -1,5 +1,6 @@
 import re
 
+
 def format_string(string):
     return re.sub(r"([\\~!#^*\(\)_+\[\]>])", r"\\\1", string)
 

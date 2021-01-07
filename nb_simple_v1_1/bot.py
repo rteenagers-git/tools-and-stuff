@@ -1,5 +1,5 @@
 # alert bot thing based on NB but also waaaay less complicated
-# Version: 1.0
+# Version: 1.1
 # Author: /u/git-commit-die
 
 # this is incredibly lazy but i had to basically rewrite everything in a couple hours so this is the best i've got

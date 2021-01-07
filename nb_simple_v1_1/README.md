@@ -1,3 +1,7 @@
 # simple alert bot thingyyyyy
 
-idk
+configs are configured in config.json
+
+app credentials go in praw.ini
+
+uh yep

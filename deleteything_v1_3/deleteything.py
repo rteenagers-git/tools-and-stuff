@@ -1,5 +1,5 @@
 # deleteything
-# Version: 1.0
+# Version: 1.3
 # Author: /u/git-commit-die
 
 
