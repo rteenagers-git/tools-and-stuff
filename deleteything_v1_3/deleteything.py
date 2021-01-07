@@ -98,7 +98,7 @@ even after it's deleted. The most notable of these services if pushshift.io.
         if input(f"This will delete all visible comments for /u/{me.name}, are you sure? [Y/n]: ") == "Y":
             delete_comments(me, delete_distinsuished)
 
-    elif re.match(r"s(ubmissoins)?", mode):
+    elif re.match(r"s(ubmissions)?", mode):
 
         if input(f"This will delete all visible submissions for /u/{me.name}, are you sure? [Y/n]: ") == "Y":
             delete_submissions(me, delete_distinsuished)
