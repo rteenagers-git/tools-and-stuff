@@ -1,3 +1,8 @@
+# deleteything
+# Version: 1.0
+# Author: /u/git-commit-die
+
+
 import praw
 import re
 

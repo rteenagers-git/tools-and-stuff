@@ -1,0 +1,11 @@
+{
+    "recipients": ["git-commit-die"],
+    "subreddits": ["all"],
+    "rules": [
+        {
+            "name": "Username Mention",
+            "search_expressions": ["(?<!u\/)git[\\s_-]?commit[\\s_-]?die"],
+            "search_fields": ["body", "selftext", "title", "url"]
+        }
+    ]
+}
