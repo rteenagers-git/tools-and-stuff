@@ -54,7 +54,7 @@ def alert_recipients(item, rule, match):
         if item.is_self:
             message_body += f"**Selftext:**\n{format_block(item.selftext)}"                               + "\n\n"
         else:
-            message_body += f"**Link URL:**\n{item.url}"                                                  + "\n\n"
+            message_body += f"**Link URL:** {item.url}"                                                  + "\n\n"
     elif item_type == "Comment":
         message_body += f"**Body:**\n{format_block(item.body)}"                                           + "\n\n"
     message_body += f"**URL:** https://www.reddit.com{item.permalink}"                                    + "\n\n"
