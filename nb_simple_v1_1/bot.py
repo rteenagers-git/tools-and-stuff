@@ -53,7 +53,7 @@ def alert_recipients(item, rule, match):
         message_body += f"**Title:** *\"{format_string(item.title)}\"*"                                   + "\n\n"
         if item.is_self and item.selftext:
             message_body += f"**Selftext:**\n{format_block(item.selftext)}"                               + "\n\n"
-        else:
+        else if item.url:
             message_body += f"**Link URL:** {item.url}"                                                   + "\n\n"
     elif item_type == "Comment":
         message_body += f"**Body:**\n{format_block(item.body)}"                                           + "\n\n"
