@@ -51,7 +51,7 @@ def alert_recipients(item, rule, match):
     message_body += f"**Subreddit:** /r/{item.subreddit.display_name}"                                    + "\n\n"
     if item_type == "Submission":
         message_body += f"**Title:** *\"{format_string(item.title)}\"*"                                   + "\n\n"
-        if item.is_self:
+        if item.is_self and item.selftext:
             message_body += f"**Selftext:**\n{format_block(item.selftext)}"                               + "\n\n"
         else:
             message_body += f"**Link URL:** {item.url}"                                                   + "\n\n"
@@ -76,6 +76,8 @@ def check_item(item):
 
     item (Submission | Comment) : PRAW Submission or Comment instance to be checked
     '''
+
+    if item.author.name in config["recipients"]: return False
 
     for rule in config["rules"]:
 
