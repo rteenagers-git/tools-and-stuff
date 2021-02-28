@@ -15,7 +15,7 @@ except Exception as e:
     exit(1)
 
 
-def delete_comments(user, delete_distinguished):
+def delete_comments(user, delete_distinguished=False, delete_regex=False):
     '''
         Deletes comments made by a user.
 
@@ -35,19 +35,20 @@ def delete_comments(user, delete_distinguished):
         feeds.append(user.comments.controversial(feed_since, limit=None))
 
     for feed in feeds:
-        for t in feed:
-            if t.distinguished and not delete_distinguished: continue # skip distingushed if required
+        for comment in feed:
+            if not delete_distinguished and comment.distinguished: continue                        # skip distingushed
+            if delete_regex and not re.search(delete_regex, comment.body, re.IGNORECASE): continue # skip if comment doesn't match regex
 
-            t.delete()
+            comment.delete()
 
             deleted_count += 1
 
-            print(f"deleted t1_{t.id}")
+            print(f"deleted {comment.name}")
 
     print(f"done deleting {str(deleted_count)} comments.")
 
 
-def delete_submissions(user, delete_distinguished):
+def delete_submissions(user, delete_distinguished=False, delete_regex=None):
     '''
         Deletes submissions made by a user.
 
@@ -67,14 +68,19 @@ def delete_submissions(user, delete_distinguished):
         feeds.append(user.submissions.controversial(feed_since, limit=None))
 
     for feed in feeds:
-        for t in feed:
-            if t.distinguished and not delete_distinguished: continue # skip distingushed if required
+        for submission in feed:
+            if submission.distinguished and not delete_distinguished: continue                               # skip distingushed
+            if delete_regex:                                                                                 # skip if submission title and selftext doesn't match regex
+                if re.search(delete_regex, submission.title, re.IGNORECASE):                                 #     check title
+                    pass
+                elif submission.is_self and not re.search(delete_regex, submission.selftext, re.IGNORECASE): #     check selftext
+                    continue
 
-            t.delete()
+            submission.delete()
 
             deleted_count += 1
 
-            print(f"deleted t3_{t.id}")
+            print(f"deleted {submission.name}")
     
     print(f"done deleting {str(deleted_count)} submissions.")
 
@@ -97,22 +103,23 @@ even after it's deleted. The most notable of these services if pushshift.io.
     mode = mode.lower() if mode else "c"                                         # select comments mode as default
 
     delete_distinsuished = input("Delete Distinguished Items? [y/n] (default n): ") == "y"
+    delete_regex         = input("Delete Items Matching Regex (optional): ")
 
     if re.match(r"c(omments)?", mode):
 
         if input(f"This will delete all visible comments for /u/{me.name}, are you sure? [Y/n]: ") == "Y":
-            delete_comments(me, delete_distinsuished)
+            delete_comments(me, delete_distinsuished, delete_regex)
 
     elif re.match(r"s(ubmissions)?", mode):
 
         if input(f"This will delete all visible submissions for /u/{me.name}, are you sure? [Y/n]: ") == "Y":
-            delete_submissions(me, delete_distinsuished)
+            delete_submissions(me, delete_distinsuished, delete_regex)
 
     elif re.match(r"b(oth)?", mode):
 
         if input(f"This will delete all visible submissions and comments for /u/{me.name}, are you sure? [Y/n]: ") == "Y":
-            delete_comments(me, delete_distinsuished)
-            delete_submissions(me, delete_distinsuished)
+            delete_comments(me, delete_distinsuished, delete_regex)
+            delete_submissions(me, delete_distinsuished, delete_regex)
 
     print("exiting...")
 
