@@ -46,7 +46,7 @@ def alert_recipients(item, rule, match):
 
     message_body = ""
     message_body += f"**Match**: *\"{match}\"*"                                                           + "\n\n"
-    message_body += f"**{item_type} Fullname:** {('t1_' if item_type == 'Comment' else 't3_') + item.id}" + "\n\n"
+    message_body += f"**{item_type} Fullname:** {item.name}" + "\n\n"
     message_body += f"**Author:** /u/{item.author.name}"                                                  + "\n\n"
     message_body += f"**Subreddit:** /r/{item.subreddit.display_name}"                                    + "\n\n"
     if item_type == "Submission":
