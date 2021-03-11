@@ -46,14 +46,14 @@ def alert_recipients(item, rule, match):
 
     message_body = ""
     message_body += f"**Match**: *\"{match}\"*"                                                           + "\n\n"
-    message_body += f"**{item_type} Fullname:** {item.name}" + "\n\n"
+    message_body += f"**{item_type} Fullname:** {item.name}"                                              + "\n\n"
     message_body += f"**Author:** /u/{item.author.name}"                                                  + "\n\n"
     message_body += f"**Subreddit:** /r/{item.subreddit.display_name}"                                    + "\n\n"
     if item_type == "Submission":
         message_body += f"**Title:** *\"{format_string(item.title)}\"*"                                   + "\n\n"
         if item.is_self:
             if item.selftext:
-                message_body += f"**Selftext:**\n{format_block(item.selftext)}"                               + "\n\n"
+                message_body += f"**Selftext:**\n{format_block(item.selftext)}"                           + "\n\n"
         elif item.url:
             message_body += f"**Link URL:** {item.url}"                                                   + "\n\n"
     elif item_type == "Comment":
