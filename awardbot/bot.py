@@ -1,6 +1,7 @@
 import re
 import praw
 
+# list of common awards including the award ID and the award's cost in coins
 # full list of awards avaliable at https://praw.readthedocs.io/en/latest/code_overview/models/submission.html
 awards = {
     "silver": ("gid_1", 100),
