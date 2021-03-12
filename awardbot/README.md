@@ -2,7 +2,7 @@
 
 **Prerequisites:**
 
-You'll need python 3, the latest version of [PRAW](https://praw.readthedocs.io/en/latest/), and a Reddit application. If you don't have a reddit application you can make a new one here: https://www.reddit.com/prefs/apps/.
+You'll need python 3, the latest version of [PRAW](https://praw.readthedocs.io/en/latest/), and a reddit application. If you don't have a reddit application you can make a new one here: https://www.reddit.com/prefs/apps/.
 
 ## how 2 use
 
