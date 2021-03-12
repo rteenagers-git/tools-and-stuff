@@ -22,7 +22,7 @@ awards = {
 subreddit        = "teenagers"         # subreddit to award submissions in, works with multireddits (e.g. redditdev+memes+u_AutoModerator)
 anonymous        = True                # show username when awarding item
 message          = None                # message sent when awarding item
-award            = awards["silver"][0] # award ID
+award            = awards["silver"]    # selected award tuple(id, cost)
 ignored_keywords = ["award"]           # ignore submissions containing words/phrases, works with regex
 max_coins_limit  = 1500                # maximum number of coins to spend
 
