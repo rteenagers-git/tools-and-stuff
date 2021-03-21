@@ -24,7 +24,7 @@ anonymous        = True                # show username when awarding item
 message          = None                # message sent when awarding item
 award            = awards["silver"]    # selected award tuple(id, cost)
 ignored_keywords = ["award"]           # ignore submissions containing words/phrases, works with regex
-ignored_flairs   = ["serious", "rant"] # ignore submissions with specific flairs, works with regex
+ignored_flairs   = ["serious", "rant"] # ignore submissions with specific flair classes
 max_coins_limit  = 1500                # maximum number of coins to spend
 
 
