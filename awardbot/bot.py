@@ -24,6 +24,7 @@ anonymous        = True                # show username when awarding item
 message          = None                # message sent when awarding item
 award            = awards["silver"]    # selected award tuple(id, cost)
 ignored_keywords = ["award"]           # ignore submissions containing words/phrases, works with regex
+ignored_flairs   = ["serious", "rant"] # ignore submissions with specific flairs, works with regex
 max_coins_limit  = 1500                # maximum number of coins to spend
 
 
@@ -32,11 +33,30 @@ r = praw.Reddit("bot")
 
 coins_spent = 0
 
+def validate_thing(thing):
+
+    if thing.over_18:                                           # check if NSFW
+        return False
+
+    for flair in ignored_flairs:                                # check flair
+        if thing.link_flair_css_class == flair:
+            return False
+
+    for field in ["title", "selftext", "body"]:
+        if not hasattr(thing, field):
+            continue
+
+        for keyword in ignored_keywords:                        # check for keywords
+            if re.search(keyword, thing[field], re.IGNORECASE):
+                return False
+
+    return True
+
 # start streaming new submissions
 for s in r.subreddit(subreddit).stream.submissions(skip_existing=True):
 
     # skip submissions flaired as serious, rant, or tagged as NSFW
-    if re.search(r"serious|rant", s.link_flair_text, re.IGNORECASE) or s.over_18:
+    if not validate_thing(s):
         continue
 
     # award the submission
